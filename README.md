@@ -53,12 +53,12 @@ rabbit.set_error_codes(error_codes);
 
 # DOM O:
 
-1. rabbits-repeat
-	1. Takes a json_obj
-	2. Then it goes ->
-	```
-	<div rabbits-repeat="JSON_obj">
-		<p>[JSON_obj.name]</p>
-		<img src="[JSON_obj.path]" alt="[JSON_obj.name]">
-	</div>
-	```
+### Rabbits repeat
+1. Takes a json_obj
+2. Then it goes ->
+```
+<div rabbits-repeat="JSON_obj">
+	<p>[JSON_obj.name]</p>
+	<img src="[JSON_obj.path]" alt="[JSON_obj.name]">
+</div>
+```
