@@ -39,7 +39,7 @@ Finally match routes
 rabbit.match();
 ```
 
-## Adding and changing error responces
+## Adding and changing error responses
 In rabbits you'll be able to update or add errors catching functions for *_404_* and *_500_*
 ```
 var error_codes = [
