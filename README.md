@@ -55,7 +55,7 @@ rabbit.set_error_codes(error_codes);
 
 1. rabbits-repeat
 	1. Takes a json_obj
-	2. It's on the form:
+	2. Then it goes ->
 	```
 	<div rabbits-repeat="JSON_obj">
 		<p>[JSON_obj.name]</p>
