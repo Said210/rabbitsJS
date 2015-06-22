@@ -1,5 +1,7 @@
 # rabbitsJS
-routes handler for PHP based on JS, well, it's not only for PHP, but it's the easyer lang to use _.htaccess_
+A little JS framework to handle routes written in JS for PHP using ".htaccess" but also to improve your experience developing for the web
+rabbits makes easier to do some things like to do, like build a file using another files, to iterate across an array and so on, well, maybe
+it's too little but it's been developed with love, so enjoy :)
 NO JQUERY REQUIRED
 
 # .htaccess @ root
@@ -93,11 +95,15 @@ Or you can also specify a route
 ```
 ### rbt-content error handler
 If you get an error using this you could handle it by adding the following error codes to your "error_codes" arrays
+
+
 | Code     | Meaning          |
-| :------- | ---------------: |
+| -------- | :--------------: |
 | 01.400   | Bad Request      |
 | 01.404   | Page not found   |
 | 01.500   | Server Error     |
+
+---
 
 ## Rabbits times
 This one is easy, is a little module that allows you to repeat the same code many times
