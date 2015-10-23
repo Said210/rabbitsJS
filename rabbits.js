@@ -1,5 +1,5 @@
 /*
-	Rabbits, by Notion. 0.0.4a
+	Rabbits, by Notion. 0.0.5a
 	Rabbits it's a JS based (As you already may know) routes manager, that's it :3
 	
 	CC-BY, Notion
@@ -31,12 +31,15 @@ var rabbitsModule = function (r) {
 	this.routes = r;
 	this.regex_routes = [];
 	this.routes_obj = [];
-	this.padding = 3; // Distance until where rabbits it's going to start to read.
+	this.padding = 3; // Distance where rabbits it's going to start to read.
 	this.error_code = null;
 	this.rabbits_elements = [];
 	this.project_name = "rabbits";
 	this.procedure = [];
 	this.execution_list = [];
+	
+	this.DEFAULT_LANG = "ES"; // Default configuration for locales usage
+
 	this.error_codes = [
 		{code: 404, action: function(){alert("This is not the page you're looking for... ");} }
 	];
@@ -204,7 +207,7 @@ var rabbitsModule = function (r) {
 			callback();
 	}
 
-	this.r_times = function(index, json){
+	this.r_times = function(index, json){ // Repeats a DOM element n times
 		var element = this.rabbits_elements[index];
 		var content = element.innerHTML;
 		var output = "";
@@ -220,19 +223,22 @@ var rabbitsModule = function (r) {
 
 	this.r_class = function(index, json){  // You use this as rbt-class="(condition) true : false" :)
 		var condition = "";
-		var end = /\)/g;
-		var start = /\(/g;;
+		var end = /\?/g;
+		var start = /\¿/g;
 		end.test(json);
 		start.test(json);
 		var condition = json.substring(start.lastIndex, end.lastIndex - 1);
+
 		var _class = json.substring(end.lastIndex + 1, json.length);
 		var elemente = this.rabbits_elements[index];
-
+		
+		console.log(condition, eval(condition));
 		if ( eval(condition) ) {
-			this.rabbits_elements[index].className = _class.split(" : ")[0];
+			_class = _class.split(":")[0].replace(/\:/g, "");
+			this.rabbits_elements[index].className = _class;
 		}else{
 			if ( _class.indexOf(":") != -1 ) {
-				_class = _class.split(" : ")[1];
+				_class = _class.split(":")[1].replace(/\:/g, "");
 				this.rabbits_elements[index].className = _class;
 			};
 		};
@@ -293,6 +299,50 @@ var rabbitsModule = function (r) {
 	    
 	    xmlhttp.send();
 
+	}
+
+	this.get_lang = function(){
+		var name = "lang=";
+		var ca = document.cookie.split(';');
+		for(var i=0; i<ca.length; i++) {
+		    var c = ca[i];
+		    while (c.charAt(0)==' ') c = c.substring(1);
+		    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+		}
+		return this.DEFAULT_LANG;
+	};
+
+	this.setCookie = function(cname, cvalue, exdays) {
+	    var d = new Date();
+	    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	    var expires = "expires="+d.toUTCString();
+	    document.cookie = cname + "=" + cvalue + "; " + expires;
+	}
+
+	this.set_lang = function(lang, r){
+		this.setCookie("lang", lang, 365);
+		if (typeof r != "undefined") {
+			if (r) {
+				location.reload();
+			};
+		};
+	}
+
+	this.r_locale = function(index, json){
+		var lang = this.get_lang();
+		var txt = "";
+		if (lang != "" && lang != this.DEFAULT_LANG){
+			//console.log(this.rabbits_elements[index].innerHTML, json);
+			eval("txt = " + lang + "." + json);
+			if (typeof txt != "undefined") {
+				//console.log(this.rabbits_elements[index], this.rabbits_elements[index].value);
+				if (typeof this.rabbits_elements[index].value == "undefined"){
+					this.rabbits_elements[index].innerHTML = txt;
+				}else{
+					this.rabbits_elements[index].value = txt;
+				}
+			};
+		};
 	}
 
 	this.r_repeat = function(index, json){

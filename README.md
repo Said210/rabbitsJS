@@ -78,7 +78,7 @@ rabbit.set_error_codes(error_codes);
 ## Rabbits class
 1. Use this function to quickly add classes to an element
 ```
-<div rbt-class="(boolean) true : false">
+<div rbt-class="¿boolean? true:false">
 	content
 </div>
 ```
@@ -123,3 +123,24 @@ hello
 hello
 hello
 ```
+## Rabbits locale
+Using this you'll be able to change your webpage lang using a JSON file, and it's as easy as eating a potato.
+```
+<div rbt-locale="hi">Hello</div>
+<div rbt-locale="section.text">I'm a text</div>
+.
+.
+.
+<script type="text/javascript">
+	var ES = {
+		hi: "hola",
+		section: {
+			text: "Soy un texto"
+		}
+	};
+	var rbt = new rabbitsModule;
+	rbt.set_lang("ES");
+	rbt.init();
+</script>
+```
+You can define a new default lang changing DEFAULT_LANG, default lang is ES.
